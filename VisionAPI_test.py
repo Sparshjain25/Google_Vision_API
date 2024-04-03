@@ -43,7 +43,7 @@ def scan_objects(image_path):
         response = requests.post(api_url, json=request_body)
         response.raise_for_status()
         response_json = response.json()
-        print(response_json["responses"])
+        #print(response_json["responses"])
 
 
         # Extracting all the objects and image info from response
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     package_name=["python-dotenv","Pillow","requests"]  #Add your packages here.
     setup_environment(package_name)
 
-    image_path = "7.jpeg"
+    image_path = "4.jpeg"
     load_dotenv("API_KEY.env")
     api_key = os.getenv("API_key")
 
