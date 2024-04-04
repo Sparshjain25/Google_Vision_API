@@ -90,7 +90,7 @@ def show_webs(Webs):
         for i in range(len(Webs)):
             print("Link ",i,": ", Webs[i])
 
-def show_objects(image_path, objects):
+def show_objects(image_path, objects,im):
     
     image = Image.open(image_path)
     draw = ImageDraw.Draw(image)
@@ -112,7 +112,7 @@ def show_objects(image_path, objects):
             draw.rectangle([x0, y0, x1, y1], outline="blue", width= int(score* 4))    #To vary the border of the box according to the confidence of the model.
             draw.text((x0, y0), obj["name"], fill="red")
     print("Total Number of Objects Detected: ",i)
-    image.save('result.jpg')
+    image.save(f'result{im+1}.jpg')
     image.show()  
 
 
@@ -136,7 +136,7 @@ if __name__ == "__main__":
         else:
             Objs,Webs = scan_objects(image_path[im])
             if Objs != None and Objs[0] != -1:
-                show_objects(image_path[im], Objs)
+                show_objects(image_path[im], Objs,im)
             else:
                 print("No objects detected by Google Vision API")
             if Webs != None and Webs[0] != -1:
