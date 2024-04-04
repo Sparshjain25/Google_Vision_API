@@ -122,22 +122,24 @@ if __name__ == "__main__":
     package_name=["python-dotenv","Pillow","requests"]  #Add your packages here.
     setup_environment(package_name)
 
-    image_path = "4.jpeg"
+    image_path = ["4.jpeg","2.jpeg"]
     load_dotenv("API_KEY.env")
     api_key = os.getenv("API_key")
+    i=0
+    for im in range(len(image_path)):
+        print("Image ",im+1)
+        ext = [".jpg", ".jpeg", ".png"]     #Checking images with particular extensions only. Could have created another function for it.
+        b, extension = os.path.splitext(image_path[im])
 
-    ext = [".jpg", ".jpeg", ".png"]     #Checking images with particular extensions only. Could have created another function for it.
-    b, extension = os.path.splitext(image_path)
-
-    if extension not in ext:
-        print("Not Valid Image Extension")
-    else:
-        Objs,Webs = scan_objects(image_path)
-        if Objs != None and Objs[0] != -1:
-            show_objects(image_path, Objs)
+        if extension not in ext:
+            print("Not Valid Image Extension")
         else:
-            print("No objects detected by Google Vision API")
-        if Webs != None and Webs[0] != -1:
-            show_webs(Webs)
-        else:
-            print("No Websites found!!")
+            Objs,Webs = scan_objects(image_path[im])
+            if Objs != None and Objs[0] != -1:
+                show_objects(image_path[im], Objs)
+            else:
+                print("No objects detected by Google Vision API")
+            if Webs != None and Webs[0] != -1:
+                show_webs(Webs)
+            else:
+                print("No Websites found!!")
